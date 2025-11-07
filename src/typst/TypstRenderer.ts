@@ -1,7 +1,7 @@
 import {
   createTypstCompiler,
   createTypstRenderer,
-  preloadRemoteFonts
+  preloadFontAssets
 } from '@myriaddreamin/typst.ts';
 
 export class TypstRenderer {
@@ -15,12 +15,13 @@ export class TypstRenderer {
     try {
       console.log('Initializing Typst compiler and renderer...');
 
-      // Preload fonts
-      await preloadRemoteFonts();
-
-      // Create compiler
+      // Create compiler with font assets
       this.compiler = createTypstCompiler();
-      await this.compiler.init();
+      await this.compiler.init({
+        beforeBuild: [
+          preloadFontAssets()
+        ]
+      });
 
       // Create renderer
       this.renderer = createTypstRenderer();

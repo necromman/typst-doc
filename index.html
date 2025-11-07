@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typst RPG - 문서형 방치형 RPG</title>
+  <link rel="stylesheet" href="/src/web/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Character Creation Screen -->
+    <div id="character-creation" class="screen">
+      <div class="creation-container">
+        <h1>⚔️ Typst RPG</h1>
+        <p class="subtitle">캐릭터를 생성하고 모험을 시작하세요</p>
+
+        <div class="form-group">
+          <label for="character-name">캐릭터 이름</label>
+          <input
+            type="text"
+            id="character-name"
+            placeholder="이름을 입력하세요"
+            maxlength="20"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>클래스 선택</label>
+          <div class="class-selection">
+            <div class="class-card" data-class="WARRIOR">
+              <div class="class-icon">⚔️</div>
+              <h3>전사</h3>
+              <p>높은 HP와 방어력으로<br/>전장을 지배합니다</p>
+              <ul class="traits">
+                <li>강인한 체력 (+30% HP)</li>
+                <li>철벽 방어 (+50% 방어력)</li>
+                <li>반격의 달인 (10% 반격)</li>
+              </ul>
+            </div>
+
+            <div class="class-card" data-class="MAGE">
+              <div class="class-icon">🔮</div>
+              <h3>마법사</h3>
+              <p>강력한 마법으로<br/>적을 압도합니다</p>
+              <ul class="traits">
+                <li>마나의 흐름 (+50% MP)</li>
+                <li>마법 증폭 (+40% 공격력)</li>
+                <li>지식의 축적 (+20% 경험치)</li>
+              </ul>
+            </div>
+
+            <div class="class-card" data-class="ROGUE">
+              <div class="class-icon">🗡️</div>
+              <h3>도적</h3>
+              <p>빠른 속도와 치명타로<br/>적을 제압합니다</p>
+              <ul class="traits">
+                <li>그림자 은신 (+60% 속도)</li>
+                <li>치명타 (25% 크리티컬)</li>
+                <li>노련한 약탈 (+30% 골드)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <button id="create-character-btn" class="btn btn-primary" disabled>
+          캐릭터 생성
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden">
+      <div class="controls">
+        <button id="start-hunt-btn" class="btn btn-success">
+          🎯 자동 사냥 시작
+        </button>
+        <button id="stop-hunt-btn" class="btn btn-danger hidden">
+          ⏸️ 자동 사냥 정지
+        </button>
+        <div class="spacer"></div>
+        <button id="reset-game-btn" class="btn btn-secondary">
+          🔄 새 게임
+        </button>
+      </div>
+
+      <div id="typst-output" class="typst-container">
+        <div class="loading">Typst 렌더링 중...</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

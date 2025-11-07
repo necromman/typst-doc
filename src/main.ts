@@ -36,13 +36,17 @@ class GameApp {
   private setupEventListeners(): void {
     // Class selection
     const classCards = document.querySelectorAll('.class-card');
+    console.log('Found class cards:', classCards.length);
+
     classCards.forEach(card => {
       card.addEventListener('click', () => {
+        console.log('Class card clicked:', card.getAttribute('data-class'));
         classCards.forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
 
         const classType = card.getAttribute('data-class') as keyof typeof CharacterClass;
         this.selectedClass = CharacterClass[classType];
+        console.log('Selected class:', this.selectedClass);
 
         const createBtn = document.getElementById('create-character-btn') as HTMLButtonElement;
         createBtn.disabled = false;
@@ -199,5 +203,7 @@ class GameApp {
   }
 }
 
-// Start the app
-new GameApp();
+// Start the app when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  new GameApp();
+});

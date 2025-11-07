@@ -1,32 +1,16 @@
-import {
-  createTypstCompiler,
-  createTypstRenderer,
-  preloadFontAssets
-} from '@myriaddreamin/typst.ts';
+// @ts-ignore
+import { $typst } from '@myriaddreamin/typst-all-in-one.ts';
 
 export class TypstRenderer {
-  private compiler: any = null;
-  private renderer: any = null;
   private initialized: boolean = false;
 
   async init(): Promise<void> {
     if (this.initialized) return;
 
     try {
-      console.log('Initializing Typst compiler and renderer...');
+      console.log('Initializing Typst renderer...');
 
-      // Create compiler with font assets
-      this.compiler = createTypstCompiler();
-      await this.compiler.init({
-        beforeBuild: [
-          preloadFontAssets()
-        ]
-      });
-
-      // Create renderer
-      this.renderer = createTypstRenderer();
-      await this.renderer.init();
-
+      // The all-in-one package initializes automatically
       this.initialized = true;
       console.log('Typst renderer initialized successfully');
     } catch (error) {
@@ -41,14 +25,9 @@ export class TypstRenderer {
     }
 
     try {
-      // Compile typst code to document
-      const doc = await this.compiler.compile({
+      // Use $typst.svg() from all-in-one package
+      const svg = await $typst.svg({
         mainContent: typstCode,
-      });
-
-      // Render document to SVG
-      const svg = await this.renderer.renderSvg({
-        document: doc,
       });
 
       return svg;
@@ -64,14 +43,9 @@ export class TypstRenderer {
     }
 
     try {
-      // Compile typst code to document
-      const doc = await this.compiler.compile({
+      // Use $typst.png() from all-in-one package
+      const png = await $typst.png({
         mainContent: typstCode,
-      });
-
-      // Render document to PNG
-      const png = await this.renderer.renderPng({
-        document: doc,
       });
 
       return png;
